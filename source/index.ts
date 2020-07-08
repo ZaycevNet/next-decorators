@@ -1,5 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import Ajv from 'ajv';
+import cookie from 'cookie';
 
 export const ajv = new Ajv({
     allErrors: true,
@@ -10,8 +11,8 @@ export const ajv = new Ajv({
 });
 
 export type RequestError<T extends Error = Error> = Error & BaseError & MethodNotAllowedError & BadRequestError & ServerInternalError & T;
-export type Request<T = {}> = NextApiRequest & T;
-export type Response<T = {}> = NextApiResponse & T;
+export type Request<T = any> = NextApiRequest & T;
+export type Response<T = any> = NextApiResponse & T;
 
 export class BaseError extends Error {
     statusCode: number;
@@ -104,7 +105,7 @@ export const Get = () => (t: any, p: string, d: PropertyDescriptor): PropertyDes
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'GET')
                 throw new MethodNotAllowedError();
 
@@ -118,7 +119,7 @@ export const Post = () => (t: any, p: string, d: PropertyDescriptor): PropertyDe
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'POST')
                 throw new MethodNotAllowedError();
 
@@ -132,7 +133,7 @@ export const Delete = () => (t: any, p: string, d: PropertyDescriptor): Property
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'DELETE')
                 throw new MethodNotAllowedError();
 
@@ -146,7 +147,7 @@ export const Head = () => (t: any, p: string, d: PropertyDescriptor): PropertyDe
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'HEAD')
                 throw new MethodNotAllowedError();
 
@@ -160,7 +161,7 @@ export const Options = () => (t: any, p: string, d: PropertyDescriptor): Propert
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'OPTIONS')
                 throw new MethodNotAllowedError();
 
@@ -174,7 +175,7 @@ export const Put = () => (t: any, p: string, d: PropertyDescriptor): PropertyDes
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'PUT')
                 throw new MethodNotAllowedError();
 
@@ -188,7 +189,7 @@ export const Patch = () => (t: any, p: string, d: PropertyDescriptor): PropertyD
 
     return {
         ...d,
-        value: async (req: Request<{method: string}>, res: Response) => {
+        value: async (req: Request, res: Response) => {
             if(req.method !== 'PATCH')
                 throw new MethodNotAllowedError();
 

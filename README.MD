@@ -74,7 +74,7 @@ Types `RequestError` is generic type `RequestError<T extents Error = Error> = Ba
 import {RequestError} from '@za-utils/next-decorators';
 ```
 
-Types `Request` & `Response` is generic type `Request<T = {}> = NextApiRequest & T` & `Response<T = {}> = NextApiResponse & T;`
+Types `Request` & `Response` is generic type `Request<T = any> = NextApiRequest & T` & `Response<T = any> = NextApiResponse & T;`
 
 ```typescript
 import {Request, Response} from '@za-utils/next-decorators';
