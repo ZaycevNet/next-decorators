@@ -62,7 +62,9 @@ export const ErrorHandler = () => (t: any, p: string, d: PropertyDescriptor) => 
     const handler = d.value;
 
     t.constructor.errorHandler = async (error: RequestError, req: Request, res: Response) => {
-        res.status(error.statusCode ? error.statusCode : 500);
+        error.statusCode = error.statusCode || 500;
+
+        res.status(error.statusCode);
 
         const response = await handler(error, req, res);
 
