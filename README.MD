@@ -10,7 +10,7 @@ ___
 
 ####_Main required decorators_
 
-`@Request()` - ***required***, makes it clear that this is not anyhow what function
+`@Req()` - ***required***, makes it clear that this is not anyhow what function
 
 `@ErrorHandler()` - ***required***, install an exception handler to your controller
 
@@ -83,7 +83,7 @@ import {Request, Response} from '@za-utils/next-decorators';
 Required decorators
 
 ```typescript
-import {ErrorHandler, Request} from '@za-utils/next-decorators';
+import {ErrorHandler, Req} from '@za-utils/next-decorators';
 ```
 
 Method decorators
@@ -112,10 +112,10 @@ _Note that **ResponseSchema**, unlike **QuerySchema** and **BodySchema**, throws
 `Controller.ts`
 
 ```typescript
-import {Request as RequestDecorator, Get, Post, Middleware, ErrorHandler, RequestError, Request, Response} from '@za-utils/next-decorators'; import {BodySchema} from "./index";
+import {Req, Get, Post, Middleware, ErrorHandler, RequestError, Request, Response} from '@za-utils/next-decorators'; import {BodySchema} from "./index";
 
 export class MyRoutesController {
-    @RequestDecorator()
+    @Req()
     @Get()
     someGetRoute(req: Request, res: Response){
         console.log('no need to use req.send, req.json, req.end');
@@ -125,7 +125,7 @@ export class MyRoutesController {
         };
     }
 
-    @RequestDecorator()
+    @Req()
     @Get()
     async asyncHandler(req: Request, res: Response){
         return {
@@ -133,7 +133,7 @@ export class MyRoutesController {
         };
     }
 
-    @RequestDecorator()
+    @Req()
     @Get()
     @Middleware((req: Request, res: Response) => {
         if(!req.cookies)
@@ -147,7 +147,7 @@ export class MyRoutesController {
         };
     }
 
-    @RequestDecorator()
+    @Req()
     @Post()
     @BodySchema({
         type: 'object',

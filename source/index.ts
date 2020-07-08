@@ -70,7 +70,7 @@ export const ErrorHandler = () => (t: any, p: string, d: PropertyDescriptor) => 
     };
 };
 
-export const Request = () => (t: any, p: string, d: PropertyDescriptor): PropertyDescriptor => {
+export const Req = () => (t: any, p: string, d: PropertyDescriptor): PropertyDescriptor => {
     const handler = d.value;
 
     return {
