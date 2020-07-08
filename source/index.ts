@@ -1,6 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import Ajv from 'ajv';
-import cookie from 'cookie';
 
 export const ajv = new Ajv({
     allErrors: true,
